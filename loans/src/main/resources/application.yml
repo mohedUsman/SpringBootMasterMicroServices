@@ -5,19 +5,21 @@ spring:
     name: "loans"
   profiles:
     active: "prod"
+
+   # data source configuration for connecting to the MySQL database
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3307/loansdb
+    username: root
+    password: root
+
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: update
     show-sql: true
+    #this sql.init.mode property is used to initialize the database schema on application startup
+    #it will read the schema.sql file and execute the SQL statements to create the necessary tables and structures in the database
+  sql:
+    init:
+      mode: always
+
   config:
     import: "optional:configserver:http://localhost:8071/"
   rabbitmq:
