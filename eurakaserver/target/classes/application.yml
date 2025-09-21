@@ -1,0 +1,26 @@
+
+spring:
+ application:
+  name: eurekaserver
+
+ port: 8070
+
+# for importing the configuration from the config server
+ config:
+  import: "optional:configserver:http://localhost:8071/"
+
+#adding readiness and liveness probes from spring boot actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
