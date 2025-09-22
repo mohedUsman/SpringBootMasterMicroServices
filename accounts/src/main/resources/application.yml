@@ -33,3 +33,30 @@ management:
     web:
       exposure:
         include: "*"
+  #when set to unrestricted, it allows all users to access the shutdown endpoint without any restrictions
+  #this is useful for gracefully shutting down the application when needed
+  endpoint:
+    shutdown:
+      access: unrestricted
+  #to enable the info related properties
+  info:
+    evn:
+      enabled: true
+
+eureka:
+  instance:
+    #this will make the service register with its IP address instead of hostname
+    preferIpAddress: true
+  client:
+    #when set to true, the service will register itself with the Eureka server upon startup
+    fetchRegistry: true
+    #this will register the service with the Eureka server so that it can be discovered by other services
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+info:
+  app:
+    name: "Accounts Service"
+    description: "Service for managing user accounts by usman"
+    version: "1.0.0"
